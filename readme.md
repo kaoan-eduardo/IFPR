@@ -25,6 +25,7 @@ A identidade visual do projeto representa a aplicação de visão computacional 
 ---
 
 ## 🌐 Redes Sociais
+
 <p>
   <a href="https://github.com/kaoan-eduardo">GitHub</a> •
   <a href="https://www.linkedin.com/in/kaoan-matos-a2a797244/">LinkedIn</a>
@@ -102,13 +103,46 @@ Aplicação em Python que:
 
 ---
 
-# 🎨 3. Design do Software
+# 🏗️ 3. Arquitetura do Sistema
 
-Sistema focado em simplicidade e rapidez na análise.
+O projeto foi desenvolvido utilizando uma **arquitetura em camadas (Layered Architecture)**, inspirada em princípios de **Clean Architecture**, garantindo organização e escalabilidade:
+
+```
+src/
+├── core/ # Lógica de Machine Learning
+├── services/ # Orquestração
+├── ui/ # Interface Streamlit
+├── utils/ # Funções auxiliares
+```
+
+### 🔹 Core
+- Extração de features (LBP, Haralick, estatísticas)
+- Predição com modelos treinados
+
+### 🔹 Services
+- Intermediação entre interface e modelo
+
+### 🔹 UI
+- Upload de imagens
+- Exibição de resultados
+- Gráficos e comparações
+
+### 🔹 Utils
+- Formatação
+- Votação entre modelos
 
 ---
 
-# 💻 4. Desenvolvimento
+# 🎨 4. Design do Software
+
+Sistema focado em:
+- Simplicidade
+- Rapidez
+- Clareza visual
+
+---
+
+# 💻 5. Desenvolvimento
 
 ## ⚙️ Processo
 Kanban
@@ -125,7 +159,7 @@ Kanban
 
 ---
 
-# 📊 5. Avaliação do Modelo
+# 📊 6. Avaliação do Modelo
 
 ## 🧠 Modelos Testados
 
@@ -140,70 +174,46 @@ Kanban
 
 ## 🏆 Estratégia Final
 
-O sistema utiliza múltiplos modelos para análise comparativa das imagens.
-
-Para cada imagem:
-- Cada modelo gera sua própria predição
-- O sistema contabiliza os votos entre as classes
-- A interface apresenta a distribuição dos votos
-- O modelo com maior confiança também é destacado
+- Uso de múltiplos modelos
+- Votação entre classificadores
+- Destaque do modelo mais confiante
 
 ---
 
 ## 📈 Interpretação
 
-- Alta precisão nos modelos avaliados
-- Comparação entre diferentes algoritmos de classificação
-- Visualização clara da votação entre classes
-- Apoio à análise por meio do destaque do modelo mais confiante
+- Alta precisão
+- Comparação entre algoritmos
+- Interface intuitiva
 
 ---
 
-# 🧪 6. Metodologia
+# 🧪 7. Metodologia
 
 ## 📷 Extração de Features
 
-A abordagem adotada combina descritores clássicos de textura com características estatísticas, visando melhorar a separação entre as classes analisadas.
-
-- **LBP (Local Binary Pattern)**: captura padrões locais de textura
-- **Haralick (GLCM)**: extrai características estatísticas baseadas na matriz de coocorrência
-- **Features estatísticas adicionais**:
+- **LBP** → padrões locais
+- **Haralick (GLCM)** → textura
+- **Features estatísticas**:
   - Média
-  - Variância
   - Desvio padrão
   - Contraste
   - Homogeneidade
-
-Essas features formam um vetor robusto de características para apoiar os algoritmos de classificação.
 
 ---
 
 ## 🤖 Modelos Utilizados
 
-O sistema utiliza múltiplos algoritmos de Machine Learning:
-
 - Random Forest
 - Decision Tree
-- K-Nearest Neighbors (KNN)
-- Support Vector Machine (SVM)
+- KNN
+- SVM
 
 ---
 
-## ⚙️ Estratégia de Classificação
+# 🚀 8. Trabalhos Futuros
 
-A aplicação apresenta os resultados de múltiplos modelos de Machine Learning para uma mesma imagem.
-
-A interface exibe:
-
-- Os votos dos modelos entre **Rachado** e **Não Rachado**
-- A comparação de confiança entre os modelos
-- O modelo mais confiante como referência visual
-
----
-
-# 🚀 7. Trabalhos Futuros
-
-- Uso de CNN
+- CNN
 - Aumento do dataset
 - Deploy em cloud
 - Integração com sistemas rodoviários
@@ -213,8 +223,8 @@ A interface exibe:
 # ▶️ Como Executar
 
 ```bash
-git clone https://github.com/kaoan-eduardo/PrivRepo.git
-cd seu-projeto
+git clone https://github.com/kaoan-eduardo/IFPR.git
+cd IFPR
 pip install -r requirements.txt
 streamlit run app.py
 ```
