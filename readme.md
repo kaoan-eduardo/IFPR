@@ -153,7 +153,8 @@ Baseada em Cross Validation.
 
 # 🏗️ 4. Arquitetura do Sistema
 
-Arquitetura modular inspirada em Clean Architecture:
+Arquitetura modular inspirada em Arquitetura em camadas:
+```
 src/
 ├── core/ # Machine Learning
 ├── services/ # Regras de negócio
@@ -162,6 +163,7 @@ src/
 │ ├── components/
 │ └── styles
 ├── utils/
+```
 
 ### 🔹 Destaque
 Separação por abas e serviços permite:
