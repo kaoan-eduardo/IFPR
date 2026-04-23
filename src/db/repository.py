@@ -1,10 +1,18 @@
+from __future__ import annotations
+
+from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.orm import Session
 
 from src.db.models import Analise
 
 
+def buscar_analise_por_hash(db: Session, hash_arquivo: str) -> Analise | None:
+    return db.query(Analise).filter(Analise.hash_arquivo == hash_arquivo).first()
+
+
 def salvar_analise(
     db: Session,
+    hash_arquivo: str,
     nome_arquivo: str,
     resultado_final: str,
     modelo_mais_confiante: str,
@@ -12,7 +20,12 @@ def salvar_analise(
     observacao: str | None = None,
     detalhes_modelos: str | None = None,
 ) -> Analise:
+    existente = buscar_analise_por_hash(db, hash_arquivo)
+    if existente is not None:
+        return existente
+
     nova_analise = Analise(
+        hash_arquivo=hash_arquivo,
         nome_arquivo=nome_arquivo,
         resultado_final=resultado_final,
         modelo_mais_confiante=modelo_mais_confiante,
@@ -21,11 +34,22 @@ def salvar_analise(
         detalhes_modelos=detalhes_modelos,
     )
 
-    db.add(nova_analise)
-    db.commit()
-    db.refresh(nova_analise)
+    try:
+        db.add(nova_analise)
+        db.commit()
+        db.refresh(nova_analise)
+        return nova_analise
 
-    return nova_analise
+    except IntegrityError:
+        db.rollback()
+        existente = buscar_analise_por_hash(db, hash_arquivo)
+        if existente is not None:
+            return existente
+        raise
+
+    except SQLAlchemyError:
+        db.rollback()
+        raise
 
 
 def listar_analises(db: Session) -> list[Analise]:

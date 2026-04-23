@@ -1,9 +1,9 @@
 from src.db.base import Base
-from src.db.models import Analise
+from src.db.models import Analise  # noqa: F401
 from src.db.session import engine
 
 
-def main():
+def main() -> None:
     Base.metadata.create_all(bind=engine)
     print("Tabelas criadas com sucesso.")
 

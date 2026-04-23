@@ -10,21 +10,23 @@ from src.core.features import extrair_features
 
 
 CLASS_NAMES = ("bom", "ruim")
+VALID_IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".bmp", ".webp", ".tif", ".tiff"}
 
 
 def listar_imagens_pasta(pasta: Path) -> list[Path]:
-    extensoes_validas = {".jpg", ".jpeg", ".png", ".bmp", ".webp", ".tif", ".tiff"}
+    if not pasta.exists():
+        return []
 
     return [
         arquivo
         for arquivo in pasta.iterdir()
-        if arquivo.is_file() and arquivo.suffix.lower() in extensoes_validas
+        if arquivo.is_file() and arquivo.suffix.lower() in VALID_IMAGE_EXTENSIONS
     ]
 
 
 def carregar_dataset(dataset_dir: Path = DATASET_DIR) -> tuple[np.ndarray, np.ndarray]:
-    X = []
-    y = []
+    X: list[np.ndarray] = []
+    y: list[str] = []
 
     for nome_classe in CLASS_NAMES:
         pasta_classe = dataset_dir / nome_classe
@@ -40,12 +42,14 @@ def carregar_dataset(dataset_dir: Path = DATASET_DIR) -> tuple[np.ndarray, np.nd
 
             try:
                 features = extrair_features(imagem)
-                X.append(features)
-                y.append(nome_classe)
-            except Exception:
+            except Exception as exc:
+                print(f"[AVISO] Falha ao extrair features de {caminho_imagem.name}: {exc}")
                 continue
+
+            X.append(features)
+            y.append(nome_classe)
 
     if not X:
         raise ValueError("Nenhuma imagem válida foi carregada do dataset.")
 
-    return np.array(X, dtype="float32"), np.array(y, dtype=object)
+    return np.asarray(X, dtype=np.float32), np.asarray(y, dtype=object)

@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Any
+
 from src.config import (
     CLASS_CRACKED,
     CLASS_NOT_CRACKED,
@@ -14,14 +16,17 @@ def nome_modelo_amigavel(nome_modelo: str) -> str:
     return MODEL_DISPLAY_NAMES.get(nome_modelo, nome_modelo)
 
 
-def resumir_votacao(resultados: dict) -> dict:
+def resumir_votacao(resultados: dict[str, dict[str, Any]]) -> dict[str, Any]:
     """
-    Faz a votação entre os modelos.
+    Realiza a votação entre os modelos válidos.
+    Ignora modelos com erro.
     """
     votos = [
-        resultado["classe"]
+        resultado.get("classe")
         for resultado in resultados.values()
-        if "classe" in resultado
+        if isinstance(resultado, dict)
+        and "erro" not in resultado
+        and resultado.get("classe") in {CLASS_CRACKED, CLASS_NOT_CRACKED}
     ]
 
     rachado = votos.count(CLASS_CRACKED)
@@ -45,14 +50,19 @@ def resumir_votacao(resultados: dict) -> dict:
     }
 
 
-def obter_modelo_mais_confiante(resultados: dict):
+def obter_modelo_mais_confiante(
+    resultados: dict[str, dict[str, Any]]
+) -> tuple[str | None, dict[str, Any] | None]:
     """
-    Retorna o modelo com maior confiança.
+    Retorna o modelo válido com maior confiança.
+    Ignora modelos com erro.
     """
     resultados_validos = {
         nome: dados
         for nome, dados in resultados.items()
-        if "probabilidade" in dados
+        if isinstance(dados, dict)
+        and "erro" not in dados
+        and "probabilidade" in dados
     }
 
     if not resultados_validos:
@@ -60,5 +70,5 @@ def obter_modelo_mais_confiante(resultados: dict):
 
     return max(
         resultados_validos.items(),
-        key=lambda item: item[1]["probabilidade"]
+        key=lambda item: float(item[1].get("probabilidade", 0.0)),
     )

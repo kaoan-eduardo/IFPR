@@ -64,81 +64,110 @@ Classificar imagens como:
 
 ---
 
-## 📦 Escopo do Produto
+# 🧩 3. Funcionalidades do Sistema
 
-### 🧾 Descrição do Produto
-Aplicação em Python que:
-- Recebe imagens
-- Analisa usando ML
-- Exibe os resultados dos modelos
+A aplicação evoluiu para além de um classificador, tornando-se uma **plataforma completa de análise de pavimentos**.
 
 ---
 
-### 🚀 Principais Entregas
-- Dataset tratado
-- Modelos treinados
-- Pipeline com múltiplas features
-- Interface em Streamlit
+## 📷 Upload Único
+
+Permite análise individual com:
+
+- Classificação por múltiplos modelos
+- Sistema de votação entre classificadores
+- Identificação do modelo mais confiante
+- Exibição de confiança (%)
+- Comparação visual entre modelos
+- Exportação do relatório em PDF
 
 ---
 
-### ✅ Critérios de Aceite
+## 🗂️ Análise em Lote
 
-**Qualitativos:**
-- Interface funcional
-- Classificação correta visualmente
+Processamento de múltiplas imagens com alta performance.
 
-**Quantitativos:**
-- Acurácia mínima: 70%+
+### 🔹 Modos de entrada:
+- Upload múltiplo (pequenos volumes)
+- Upload via arquivo `.zip` (grandes volumes)
+
+### 🔹 Recursos:
+- Processamento de milhares de imagens
+- Barra de progresso em tempo real
+- Resumo automático do lote:
+  - Total de imagens
+  - Com rachaduras
+  - Em bom estado
+  - Inválidas
+- Tabela resumida
+- Galeria otimizada (limitada)
+- Detalhamento parcial para performance
+
+### 🔹 Otimizações:
+- Limite de renderização de imagens
+- Redução de uso de memória
+- Processamento progressivo
 
 ---
 
-## ⚠️ Matriz de Riscos
+## 📊 Dashboard de Análises
 
-| ID | Tipo | Descrição | Impacto | Probabilidade | Resposta |
-|----|------|----------|--------|--------------|----------|
-| R1 | Técnico | Dataset ruim | Alto | Médio | Limpeza |
-| R2 | Técnico | Overfitting | Alto | Médio | Validação |
-| R3 | Projeto | Tempo | Médio | Alto | Kanban |
+Painel interativo com visão global.
+
+### 🔹 Métricas:
+- Total de análises
+- Com rachaduras
+- Bom estado
+- Confiança média
+- Taxa de incerteza
+
+### 🔹 Visualizações:
+- Gráfico de distribuição
+- Frequência por modelo
+- Evolução temporal
+
+### 🔹 Exportação:
+- 📄 PDF
+- 📊 Excel (compatível com Power BI)
 
 ---
 
-# 🏗️ 3. Arquitetura do Sistema
+## 🧠 Avaliação dos Modelos
 
-O projeto foi desenvolvido utilizando uma **arquitetura em camadas (Layered Architecture)**, inspirada em princípios de **Clean Architecture**, garantindo organização e escalabilidade:
+Baseada em Cross Validation.
 
-```
+### 🔹 Métricas:
+- Accuracy
+- Precision
+- Recall
+- F1-score
+- Specificity
+
+### 🔹 Recursos:
+- Comparação entre modelos
+- Análise por fold
+- Melhor modelo automático
+- Matriz de confusão interativa
+
+---
+
+# 🏗️ 4. Arquitetura do Sistema
+
+Arquitetura modular inspirada em Clean Architecture:
 src/
-├── core/ # Lógica de Machine Learning
-├── services/ # Orquestração
-├── ui/ # Interface Streamlit
-├── utils/ # Funções auxiliares
-```
+├── core/ # Machine Learning
+├── services/ # Regras de negócio
+├── ui/
+│ ├── tabs/ # Cada aba separada
+│ ├── components/
+│ └── styles
+├── utils/
 
-### 🔹 Core
-- Extração de features (LBP, Haralick, estatísticas)
-- Predição com modelos treinados
-
-### 🔹 Services
-- Intermediação entre interface e modelo
-
-### 🔹 UI
-- Upload de imagens
-- Exibição de resultados
-- Gráficos e comparações
-
-### 🔹 Utils
-- Formatação
-- Votação entre modelos
-
----
-
-# 🎨 4. Design do Software
-
-Sistema focado em:
-- Simplicidade
-- Rapidez
-- Clareza visual
+### 🔹 Destaque
+Separação por abas e serviços permite:
+- escalabilidade
+- manutenção facilitada
+- evolução contínua
 
 ---
 
@@ -150,12 +179,14 @@ Kanban
 ---
 
 ## 🛠️ Tecnologias
+
 - Python
 - OpenCV
 - Scikit-learn
 - Streamlit
 - NumPy
 - Pandas
+- Plotly
 
 ---
 
@@ -174,27 +205,27 @@ Kanban
 
 ## 🏆 Estratégia Final
 
-- Uso de múltiplos modelos
-- Votação entre classificadores
-- Destaque do modelo mais confiante
+- Ensemble manual
+- Votação entre modelos
+- Modelo mais confiante
 
 ---
 
 ## 📈 Interpretação
 
 - Alta precisão
-- Comparação entre algoritmos
-- Interface intuitiva
+- Robustez
+- Boa generalização
 
 ---
 
 # 🧪 7. Metodologia
 
-## 📷 Extração de Features
+## 📷 Features
 
-- **LBP** → padrões locais
-- **Haralick (GLCM)** → textura
-- **Features estatísticas**:
+- LBP (Local Binary Pattern)
+- Haralick (GLCM)
+- Estatísticas:
   - Média
   - Desvio padrão
   - Contraste
@@ -202,7 +233,7 @@ Kanban
 
 ---
 
-## 🤖 Modelos Utilizados
+## 🤖 Modelos
 
 - Random Forest
 - Decision Tree
@@ -211,12 +242,24 @@ Kanban
 
 ---
 
-# 🚀 8. Trabalhos Futuros
+# 🚀 8. Diferenciais
+
+✔ Sistema completo (não só modelo)  
+✔ Processamento em lote otimizado  
+✔ Interface interativa  
+✔ Exportação de dados  
+✔ Arquitetura modular  
+✔ Pronto para integração com BI  
+
+---
+
+# 🔮 9. Trabalhos Futuros
 
 - CNN
-- Aumento do dataset
+- Heatmap de explicabilidade
+- ROC / AUC
+- API com FastAPI
 - Deploy em cloud
-- Integração com sistemas rodoviários
 
 ---
 

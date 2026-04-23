@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from functools import lru_cache
 from pathlib import Path
+from typing import Any
 
 import cv2
 import joblib
@@ -15,13 +16,20 @@ from src.config import (
 from src.core.features import extrair_features
 
 
+def _resultado_erro_modelo(mensagem: str) -> dict[str, Any]:
+    return {
+        "classe_bruta": None,
+        "classe": "Erro",
+        "probabilidade": 0.0,
+        "prob_ruim": 0.0,
+        "prob_bom": 0.0,
+        "erro": mensagem,
+    }
+
+
 @lru_cache(maxsize=1)
-def carregar_modelos() -> dict:
-    """
-    Carrega todos os modelos disponíveis.
-    Os .pkl já são pipelines treinados com scaler + modelo.
-    """
-    modelos = {}
+def carregar_modelos() -> dict[str, Any]:
+    modelos: dict[str, Any] = {}
 
     for nome_modelo, caminho_modelo in MODEL_FILES.items():
         caminho = Path(caminho_modelo)
@@ -40,19 +48,18 @@ def carregar_modelos() -> dict:
     return modelos
 
 
-def interpretar_classe(predicao) -> str:
-    """
-    Converte a classe bruta do modelo em classe amigável.
-    """
-    if str(predicao) == "ruim":
+def interpretar_classe(predicao: Any) -> str:
+    predicao_str = str(predicao).strip().lower()
+
+    if predicao_str == "ruim":
         return CLASS_CRACKED
-    return CLASS_NOT_CRACKED
+    if predicao_str == "bom":
+        return CLASS_NOT_CRACKED
+
+    return str(predicao)
 
 
-def prever_imagem(caminho_imagem: str) -> dict:
-    """
-    Executa a predição da imagem em todos os modelos.
-    """
+def prever_imagem(caminho_imagem: str) -> dict[str, Any]:
     imagem = cv2.imread(caminho_imagem)
 
     if imagem is None:
@@ -60,15 +67,15 @@ def prever_imagem(caminho_imagem: str) -> dict:
 
     try:
         features = np.asarray(extrair_features(imagem), dtype=np.float32).reshape(1, -1)
-    except Exception as e:
-        return {"erro": f"Erro ao extrair features: {e}"}
+    except Exception as exc:
+        return {"erro": f"Erro ao extrair features: {exc}"}
 
     try:
         modelos = carregar_modelos()
-    except Exception as e:
-        return {"erro": f"Erro ao carregar modelos: {e}"}
+    except Exception as exc:
+        return {"erro": f"Erro ao carregar modelos: {exc}"}
 
-    resultados = {}
+    resultados: dict[str, Any] = {}
 
     for nome_modelo, pipeline in modelos.items():
         try:
@@ -79,12 +86,12 @@ def prever_imagem(caminho_imagem: str) -> dict:
                 "classe": interpretar_classe(pred),
                 "probabilidade": 0.0,
                 "prob_ruim": 0.0,
-                "prob_bom": 0.0
+                "prob_bom": 0.0,
             }
 
-            if hasattr(pipeline, "predict_proba"):
+            if hasattr(pipeline, "predict_proba") and hasattr(pipeline, "classes_"):
                 prob = pipeline.predict_proba(features)[0]
-                classes = list(pipeline.classes_)
+                classes = [str(classe) for classe in pipeline.classes_]
 
                 if "ruim" in classes:
                     idx_ruim = classes.index("ruim")
@@ -94,16 +101,14 @@ def prever_imagem(caminho_imagem: str) -> dict:
                     idx_bom = classes.index("bom")
                     resultado["prob_bom"] = float(prob[idx_bom])
 
-                idx_pred = classes.index(pred)
-                resultado["probabilidade"] = float(prob[idx_pred])
+                pred_str = str(pred)
+                if pred_str in classes:
+                    idx_pred = classes.index(pred_str)
+                    resultado["probabilidade"] = float(prob[idx_pred])
 
             resultados[nome_modelo] = resultado
 
-        except Exception as e:
-            resultados[nome_modelo] = {
-                "classe": "Erro",
-                "probabilidade": 0.0,
-                "erro": str(e)
-            }
+        except Exception as exc:
+            resultados[nome_modelo] = _resultado_erro_modelo(str(exc))
 
     return resultados

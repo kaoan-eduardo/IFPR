@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from pathlib import Path
 
 # =========================
@@ -22,6 +24,7 @@ RESULTS_DIR = BASE_DIR / "results"
 # ARQUIVOS
 # =========================
 LOGO_PATH = ASSETS_DIR / "logo_ifpr_icon.png"
+METRICS_FILE_PATH = RESULTS_DIR / "metricas_cross_validation.xlsx"
 
 # =========================
 # APP
@@ -57,4 +60,11 @@ MODEL_DISPLAY_NAMES = {
 # =========================
 # UPLOAD
 # =========================
-ALLOWED_IMAGE_EXTENSIONS = ["jpg", "jpeg", "png"]
+ALLOWED_IMAGE_EXTENSIONS = ["jpg", "jpeg", "png", "bmp", "webp", "tif", "tiff"]
+
+# =========================
+# LIMITES DE UI
+# =========================
+LIMITE_GALERIA = 60
+LIMITE_DETALHAMENTO = 20
+LIMITE_GALERIA_COMPLETA = 100
