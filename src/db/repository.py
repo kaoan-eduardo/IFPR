@@ -20,10 +20,6 @@ def salvar_analise(
     observacao: str | None = None,
     detalhes_modelos: str | None = None,
 ) -> Analise:
-    existente = buscar_analise_por_hash(db, hash_arquivo)
-    if existente is not None:
-        return existente
-
     nova_analise = Analise(
         hash_arquivo=hash_arquivo,
         nome_arquivo=nome_arquivo,
@@ -39,13 +35,6 @@ def salvar_analise(
         db.commit()
         db.refresh(nova_analise)
         return nova_analise
-
-    except IntegrityError:
-        db.rollback()
-        existente = buscar_analise_por_hash(db, hash_arquivo)
-        if existente is not None:
-            return existente
-        raise
 
     except SQLAlchemyError:
         db.rollback()

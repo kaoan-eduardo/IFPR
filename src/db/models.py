@@ -20,7 +20,7 @@ class Analise(Base):
     __tablename__ = "analises"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
-    hash_arquivo: Mapped[str] = mapped_column(String(64), nullable=False, unique=True, index=True)
+    hash_arquivo: Mapped[str] = mapped_column(String(64), nullable=False, index=True)
 
     nome_arquivo: Mapped[str] = mapped_column(String(255), nullable=False)
     data_analise: Mapped[datetime] = mapped_column(

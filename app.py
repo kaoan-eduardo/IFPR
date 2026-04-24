@@ -9,6 +9,7 @@ from src.ui.tabs.tab_avaliacao_modelo import render_tab_avaliacao_modelo
 from src.ui.tabs.tab_dashboard import render_tab_dashboard
 from src.ui.tabs.tab_multiplas_imagens import render_tab_multiplas_imagens
 from src.ui.tabs.tab_upload_unico import render_tab_upload_unico
+from src.ui.tabs.tab_glossario import render_tab_glossario
 
 
 def inicializar_session_state() -> None:
@@ -38,11 +39,12 @@ def main() -> None:
     aplicar_estilos()
     renderizar_header()
 
-    tab1, tab2, tab3, tab4 = st.tabs([
+    tab1, tab2, tab3, tab4, tab5 = st.tabs([
         "📷 Upload único",
         "🗂️ Múltiplas imagens",
         "📚 Histórico",
         "✅ Avaliação do Modelo",
+        "📖 Glossário",
     ])
 
     with tab1:
@@ -56,6 +58,9 @@ def main() -> None:
 
     with tab4:
         render_tab_avaliacao_modelo()
+
+    with tab5:
+        render_tab_glossario()
 
 
 if __name__ == "__main__":
