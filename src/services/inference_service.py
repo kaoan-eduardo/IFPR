@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import os
 import tempfile
-from typing import Any, BinaryIO
+from typing import Any
 
 from src.core.predict import prever_imagem
 
