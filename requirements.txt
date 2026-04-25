@@ -21,7 +21,7 @@ Pillow==12.2.0
 # VISUALIZAÇÃO
 # =========================
 plotly==5.22.0
-streamlit==1.37.0
+streamlit==1.54.0
 
 # =========================
 # BANCO DE DADOS
