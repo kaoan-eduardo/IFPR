@@ -28,10 +28,11 @@ jobs:
           pip install -r requirements.txt
           pip install pytest coverage
 
-      - name: Rodar testes + coverage
+      - name: Rodar testes + gerar coverage
         run: |
-          coverage run -m pytest
-          coverage xml
+          coverage erase
+          coverage run --rcfile=.coveragerc -m pytest
+          coverage xml --rcfile=.coveragerc --ignore-errors
 
       - name: Enviar cobertura para o Codacy
         run: |
