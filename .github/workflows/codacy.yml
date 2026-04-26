@@ -28,7 +28,11 @@ jobs:
           pip install -r requirements.txt
           pip install pytest coverage
 
-      - name: Rodar testes + gerar coverage
+      - name: Rodar testes
+        run: |
+          pytest
+
+      - name: Gerar coverage
         run: |
           coverage erase
           coverage run --rcfile=.coveragerc -m pytest
