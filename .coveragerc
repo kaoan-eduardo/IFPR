@@ -1,25 +1,18 @@
 [run]
 branch = True
 source = src
-relative_files = True
 omit =
-    tests/*
     */tests/*
-    config-*.py
-    */config-*.py
+    */__pycache__/*
     */venv/*
     */.venv/*
-    */__pycache__/*
+    */config-*.py
+    config-*.py
 
 [report]
 ignore_errors = True
 show_missing = True
 skip_empty = True
-omit =
-    tests/*
-    */tests/*
-    config-*.py
-    */config-*.py
 
 [xml]
 output = coverage.xml

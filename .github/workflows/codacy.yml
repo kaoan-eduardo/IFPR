@@ -28,9 +28,11 @@ jobs:
           pip install -r requirements.txt
           pip install pytest coverage
 
-      - name: Rodar testes
-        run: |
-          pytest
+          - name: Rodar testes com coverage
+          run: |
+            coverage erase
+            coverage run --source=src -m pytest
+            coverage xml --ignore-errors
 
       - name: Gerar coverage
         run: |
