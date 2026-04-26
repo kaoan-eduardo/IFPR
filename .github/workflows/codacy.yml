@@ -33,8 +33,8 @@ jobs:
           coverage run --source=src -m pytest
           coverage xml --ignore-errors
 
-      - name: Enviar cobertura para o Codacy
-        run: |
-          bash <(curl -Ls https://coverage.codacy.com/get.sh) report \
-            -r coverage.xml \
-            --project-token ${{ secrets.CODACY_PROJECT_TOKEN }} \
+      - name: Enviar coverage para o Codacy
+        uses: codacy/codacy-coverage-reporter-action@v1.3.0
+        with:
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          coverage-reports: coverage.xml
