@@ -13,7 +13,7 @@ def _preparar_dataframe_para_excel(df: pd.DataFrame) -> pd.DataFrame:
     df_export = df.copy()
 
     for coluna in df_export.columns:
-        if pd.api.types.is_datetime64tz_dtype(df_export[coluna]):
+        if isinstance(df_export[coluna].dtype, pd.DatetimeTZDtype):
             df_export[coluna] = df_export[coluna].dt.tz_localize(None)
 
     return df_export
