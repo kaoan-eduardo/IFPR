@@ -43,7 +43,7 @@ Sistema de visão computacional aplicado à **detecção automática de fissuras
 
 ---
 
-## 📅 Data
+## 📅 Data de Criação
 Abril de 2026
 
 ---
@@ -70,7 +70,7 @@ Classificar imagens em:
 
 # 🧩 3. Funcionalidades
 
-## 📷 Upload Único
+### 📷 Upload Único
 - Ensemble de modelos
 - Votação entre classificadores
 - Modelo mais confiante
@@ -80,7 +80,7 @@ Classificar imagens em:
 
 ---
 
-## 🗂️ Análise em Lote
+### 🗂️ Análise em Lote
 - Upload múltiplo ou `.zip`
 - Processamento de milhares de imagens
 - Barra de progresso
@@ -89,7 +89,7 @@ Classificar imagens em:
 
 ---
 
-## 📊 Dashboard
+### 📊 Dashboard
 - Métricas globais
 - Distribuição de resultados
 - Frequência por modelo
@@ -101,7 +101,7 @@ Exportação:
 
 ---
 
-## 🧠 Avaliação dos Modelos
+### 🧠 Avaliação dos Modelos
 - Cross Validation (k-fold)
 - Accuracy, Precision, Recall, F1
 - Matriz de confusão
@@ -109,7 +109,7 @@ Exportação:
 
 ---
 
-## 📖 Glossário
+### 📖 Glossário
 - Explicação das métricas utilizadas na avaliação dos modelos
 - Definições claras de Accuracy, Precision, Recall e F1-Score
 - Interpretação da matriz de confusão
@@ -133,7 +133,7 @@ src/
 
 ---
 
-## 🔌 API (FastAPI)
+### 🔌 API (FastAPI)
 Permite integração com:
 - aplicações externas
 - sistemas corporativos
@@ -141,7 +141,7 @@ Permite integração com:
 
 ---
 
-## 🗄️ Banco de Dados
+### 🗄️ Banco de Dados
 
 - PostgreSQL
 - SQLAlchemy ORM
@@ -157,7 +157,7 @@ Tabela principal:
 
 # 🧪 5. Testes e Qualidade
 
-## ✅ Testes automatizados
+### ✅ Testes automatizados
 
 - Pytest
 - Testes unitários e de integração
@@ -167,14 +167,14 @@ Tabela principal:
 
 ---
 
-## 📊 Cobertura
+### 📊 Cobertura
 
 - +80% coverage
 - Relatórios via `coverage.py`
 
 ---
 
-## 🔄 CI/CD
+### 🔄 CI/CD
 
 GitHub Actions:
 - Execução automática de testes
@@ -221,7 +221,7 @@ Codacy:
 
 # 🧠 8. Metodologia
 
-## 📷 Features
+### 📷 Features
 
 - LBP (Local Binary Pattern)
 - Haralick (GLCM)
@@ -229,7 +229,7 @@ Codacy:
 
 ---
 
-## 🤖 Modelos
+### 🤖 Modelos
 
 - Random Forest
 - SVM
@@ -253,11 +253,8 @@ Codacy:
 # 🔮 10. Roadmap
 
 - CNN (Deep Learning)
-- Heatmaps (Explainability)
-- ROC / AUC
 - Deploy em cloud
 - Autenticação de usuários
-- Multi-tenant SaaS
 
 ---
 
