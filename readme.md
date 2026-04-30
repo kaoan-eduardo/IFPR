@@ -1,6 +1,6 @@
 <p align="center">
   <img src="assets/logo_ifpr_icon.png" width="60"/>
-  <b style="font-size: 28px;">IFPR - Identificação de Fissuras em Pavimentos Rodoviários</b>
+  <b style="font-size: 28px;">IFPR Vision - Identificação de Fissuras em Pavimentos Rodoviários</b>
 </p>
 
 <p align="center">
@@ -8,6 +8,8 @@
   <img src="https://img.shields.io/badge/Status-Em%20Desenvolvimento-orange"/>
   <img src="https://img.shields.io/badge/Machine%20Learning-Ativo-green"/>
   <img src="https://img.shields.io/badge/Interface-Streamlit-red"/>
+  <img src="https://img.shields.io/badge/Testes-Pytest-blueviolet"/>
+  <img src="https://img.shields.io/badge/Coverage-80%25+-brightgreen"/>
 </p>
 
 ---
@@ -20,11 +22,11 @@
   <img src="assets/logo_ifpr_dark.png" width="480"/>
 </p>
 
-A identidade visual do projeto representa a aplicação de visão computacional na análise de pavimentos.
+Sistema de visão computacional aplicado à **detecção automática de fissuras em pavimentos rodoviários**, utilizando Machine Learning clássico e arquitetura escalável.
 
 ---
 
-## 🌐 Redes Sociais
+## 🌐 Redes
 
 <p>
   <a href="https://github.com/kaoan-eduardo">GitHub</a> •
@@ -33,168 +35,163 @@ A identidade visual do projeto representa a aplicação de visão computacional 
 
 ---
 
-## 👥 Organização da Equipe
+## 👥 Equipe
 
 | Nome | Papel | Responsabilidade |
 |------|------|----------------|
-| Kaoan Eduardo | Desenvolvedor | Desenvolvimento do modelo, tratamento de dados, interface |
-
-📢 Comunicação:
-- Trello
-- GitHub
+| Kaoan Eduardo | Desenvolvedor | ML, backend, frontend, banco de dados, testes |
 
 ---
 
-## 📅 Data de criação
+## 📅 Data
 Abril de 2026
 
 ---
 
-# 🧠 2. Concepção
+# 🧠 2. Visão do Sistema
 
-## 📌 Visão Geral
-Sistema inteligente capaz de identificar automaticamente rachaduras em pavimentos utilizando visão computacional e Machine Learning.
+Sistema inteligente capaz de:
+
+✔ Detectar rachaduras em imagens de pavimento  
+✔ Processar grandes volumes de imagens  
+✔ Fornecer métricas e insights  
+✔ Exportar resultados para análise externa  
 
 ---
 
 ## 🎯 Objetivo
-Classificar imagens como:
-- Rachado
-- Não rachado
+
+Classificar imagens em:
+
+- 🟥 Com rachaduras
+- 🟩 Em bom estado
 
 ---
 
-# 🧩 3. Funcionalidades do Sistema
-
-A aplicação evoluiu para além de um classificador, tornando-se uma **plataforma completa de análise de pavimentos**.
-
----
+# 🧩 3. Funcionalidades
 
 ## 📷 Upload Único
-
-Permite análise individual com:
-
-- Classificação por múltiplos modelos
-- Sistema de votação entre classificadores
-- Identificação do modelo mais confiante
-- Exibição de confiança (%)
-- Comparação visual entre modelos
-- Exportação do relatório em PDF
+- Ensemble de modelos
+- Votação entre classificadores
+- Modelo mais confiante
+- Probabilidade (%)
+- Comparação visual
+- Exportação PDF
 
 ---
 
 ## 🗂️ Análise em Lote
-
-Processamento de múltiplas imagens com alta performance.
-
-### 🔹 Modos de entrada:
-- Upload múltiplo (pequenos volumes)
-- Upload via arquivo `.zip` (grandes volumes)
-
-### 🔹 Recursos:
+- Upload múltiplo ou `.zip`
 - Processamento de milhares de imagens
-- Barra de progresso em tempo real
-- Resumo automático do lote:
-  - Total de imagens
-  - Com rachaduras
-  - Em bom estado
-  - Inválidas
-- Tabela resumida
-- Galeria otimizada (limitada)
-- Detalhamento parcial para performance
-
-### 🔹 Otimizações:
-- Limite de renderização de imagens
-- Redução de uso de memória
-- Processamento progressivo
+- Barra de progresso
+- Resumo automático
+- Galeria otimizada
 
 ---
 
-## 📊 Dashboard de Análises
-
-Painel interativo com visão global.
-
-### 🔹 Métricas:
-- Total de análises
-- Com rachaduras
-- Bom estado
-- Confiança média
-- Taxa de incerteza
-
-### 🔹 Visualizações:
-- Gráfico de distribuição
+## 📊 Dashboard
+- Métricas globais
+- Distribuição de resultados
 - Frequência por modelo
 - Evolução temporal
 
-### 🔹 Exportação:
-- 📄 PDF
-- 📊 Excel (compatível com Power BI)
+Exportação:
+- PDF
+- Excel (Power BI ready)
 
 ---
 
 ## 🧠 Avaliação dos Modelos
-
-Baseada em Cross Validation.
-
-### 🔹 Métricas:
-- Accuracy
-- Precision
-- Recall
-- F1-score
-- Specificity
-
-### 🔹 Recursos:
+- Cross Validation (k-fold)
+- Accuracy, Precision, Recall, F1
+- Matriz de confusão
 - Comparação entre modelos
-- Análise por fold
-- Melhor modelo automático
-- Matriz de confusão interativa
 
 ---
 
-# 🏗️ 4. Arquitetura do Sistema
+# 🏗️ 4. Arquitetura
 
-Arquitetura modular inspirada em Arquitetura em camadas:
-```
-src/
-├── core/ # Machine Learning
-├── services/ # Regras de negócio
-├── ui/
-│ ├── tabs/ # Cada aba separada
-│ ├── components/
-│ └── styles
-├── utils/
+Arquitetura em camadas, focada em escalabilidade:
+
+```bash
+src/ 
+├── core/            # Machine Learning (features, predição)
+├── services/        # Regras de negócio 
+├── db/              # Banco de dados (SQLAlchemy)
+|── ui/              # Interface Streamlit
+├── utils/           # Funções auxiliares
 ```
 
-### 🔹 Destaque
-Separação por abas e serviços permite:
-- escalabilidade
-- manutenção facilitada
-- evolução contínua
+---
+
+## 🔌 API (FastAPI)
+Permite integração com:
+- aplicações externas
+- sistemas corporativos
+- futuros apps mobile
 
 ---
 
-# 💻 5. Desenvolvimento
+## 🗄️ Banco de Dados
 
-## ⚙️ Processo
-Kanban
+- PostgreSQL
+- SQLAlchemy ORM
+
+Tabela principal:
+- `analises`
+  - resultado
+  - modelo mais confiante
+  - confiança
+  - detalhes dos modelos
 
 ---
 
-## 🛠️ Tecnologias
+# 🧪 5. Testes e Qualidade
+
+## ✅ Testes automatizados
+
+- Pytest
+- Testes unitários e de integração
+- Testes da API
+- Testes do dashboard
+- Teste de Carga com Locust
+
+---
+
+## 📊 Cobertura
+
+- +80% coverage
+- Relatórios via `coverage.py`
+
+---
+
+## 🔄 CI/CD
+
+GitHub Actions:
+- Execução automática de testes
+- Geração de coverage
+
+Codacy:
+- Análise de qualidade de código
+- Monitoramento contínuo
+
+---
+
+# 💻 6. Tecnologias
 
 - Python
-- OpenCV
 - Scikit-learn
+- OpenCV
 - Streamlit
-- NumPy
-- Pandas
+- FastAPI
+- PostgreSQL
+- SQLAlchemy
 - Plotly
+- Pandas / NumPy
 
 ---
 
-# 📊 6. Avaliação do Modelo
-
-## 🧠 Modelos Testados
+# 📊 7. Modelos
 
 | Modelo | Accuracy |
 |--------|---------|
@@ -205,71 +202,105 @@ Kanban
 
 ---
 
-## 🏆 Estratégia Final
+## 🏆 Estratégia
 
-- Ensemble manual
-- Votação entre modelos
+- Ensemble (votação)
 - Modelo mais confiante
+- Melhor robustez geral
 
 ---
 
-## 📈 Interpretação
-
-- Alta precisão
-- Robustez
-- Boa generalização
-
----
-
-# 🧪 7. Metodologia
+# 🧠 8. Metodologia
 
 ## 📷 Features
 
 - LBP (Local Binary Pattern)
 - Haralick (GLCM)
-- Estatísticas:
-  - Média
-  - Desvio padrão
-  - Contraste
-  - Homogeneidade
+- Estatísticas de textura
 
 ---
 
 ## 🤖 Modelos
 
 - Random Forest
-- Decision Tree
-- KNN
 - SVM
+- KNN
+- Decision Tree
 
 ---
 
-# 🚀 8. Diferenciais
+# 🚀 9. Diferenciais
 
-✔ Sistema completo (não só modelo)  
-✔ Processamento em lote otimizado  
-✔ Interface interativa  
-✔ Exportação de dados  
-✔ Arquitetura modular  
-✔ Pronto para integração com BI  
+✔ Arquitetura profissional  
+✔ API integrada  
+✔ Banco de dados real  
+✔ Testes automatizados  
+✔ Dashboard completo  
+✔ Exportação avançada  
+✔ Pipeline de dados estruturado  
 
 ---
 
-# 🔮 9. Trabalhos Futuros
+# 🔮 10. Roadmap
 
-- CNN
-- Heatmap de explicabilidade
+- CNN (Deep Learning)
+- Heatmaps (Explainability)
 - ROC / AUC
-- API com FastAPI
 - Deploy em cloud
+- Autenticação de usuários
+- Multi-tenant SaaS
 
 ---
 
-# ▶️ Como Executar
+# ▶️ 11. Como Executar
 
 ```bash
 git clone https://github.com/kaoan-eduardo/IFPR.git
 cd IFPR
+
+python -m venv venv
+source venv/bin/activate  # Linux/macOS
+venv\Scripts\activate     # Windows
+
 pip install -r requirements.txt
+```
+
+### ▶️ Rodar aplicação
+
+```bash
 streamlit run app.py
 ```
+
+### ▶️ Rodar API
+
+```bash
+uvicorn api.main:app --reload
+```
+
+### ▶️ Rodar testes
+
+```bash
+pytest
+```
+
+
+### ▶️ Coverage
+
+```bash
+coverage run -m pytest
+coverage report -m
+```
+
+### ▶️ Teste de carga
+
+```bash
+locust
+```
+
+---
+
+# 📌 Autor
+Kaoan Eduardo Pigaiani de Matos
+IFPR - Gestão de TI
+
+---
