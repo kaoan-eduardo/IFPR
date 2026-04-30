@@ -118,7 +118,7 @@ src/
 ├── core/            # Machine Learning (features, predição)
 ├── services/        # Regras de negócio 
 ├── db/              # Banco de dados (SQLAlchemy)
-|── ui/              # Interface Streamlit
+├── ui/              # Interface Streamlit
 ├── utils/           # Funções auxiliares
 ```
 
