@@ -109,6 +109,15 @@ Exportação:
 
 ---
 
+## 📖 Glossário
+- Explicação das métricas utilizadas na avaliação dos modelos
+- Definições claras de Accuracy, Precision, Recall e F1-Score
+- Interpretação da matriz de confusão
+- Explicação da curva ROC e AUC
+- Apoio para usuários não técnicos compreenderem os resultados
+
+---
+
 # 🏗️ 4. Arquitetura
 
 Arquitetura em camadas, focada em escalabilidade:
